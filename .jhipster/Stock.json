@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "vin",
+            "otherEntityName": "vin",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "nbBouteille",
+            "fieldType": "Integer"
+        }
+    ],
+    "changelogDate": "20170709160054",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "stock",
+    "pagination": "no"
+}

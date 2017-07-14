@@ -1,0 +1,98 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "typeVin",
+            "otherEntityName": "typeVin",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "libelle"
+        },
+        {
+            "relationshipName": "millesime",
+            "otherEntityName": "millesime",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "libelle"
+        },
+        {
+            "relationshipName": "stock",
+            "otherEntityName": "stock",
+            "relationshipType": "one-to-many",
+            "otherEntityRelationshipName": "vin"
+        },
+        {
+            "relationshipName": "met",
+            "otherEntityName": "met",
+            "relationshipType": "many-to-many",
+            "otherEntityField": "id",
+            "ownerSide": true,
+            "otherEntityRelationshipName": "vin"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "appellation",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "3",
+            "fieldValidateRulesMaxlength": "255"
+        },
+        {
+            "fieldName": "cuvee",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "cepage",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "region",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "domaine",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "temperature",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "tauxAlcool",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "codeBare",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "anneeDebut",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "anneeFin",
+            "fieldType": "Integer"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength"
+            ],
+            "fieldValidateRulesMinlength": 0
+        },
+        {
+            "fieldName": "photoEtiquette",
+            "fieldType": "byte[]",
+            "fieldTypeBlobContent": "image"
+        }
+    ],
+    "changelogDate": "20170709161456",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "vin",
+    "pagination": "infinite-scroll"
+}

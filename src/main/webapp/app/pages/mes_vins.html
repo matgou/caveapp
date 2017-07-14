@@ -1,0 +1,111 @@
+<div>
+	<h2>Vins</h2>
+	<jhi-alert></jhi-alert>
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-xs-4 no-padding-left">
+				<button class="btn btn-primary" ui-sref="vin.new">
+					<span class="glyphicon glyphicon-plus"></span> <span>
+						Ajouter un vin </span>
+				</button>
+			</div>
+		</div>
+	</div>
+	<br />
+	<div class="container-fluid">
+		<div class="row">
+			<div class="col-md-4">
+			<!-- Carousel
+    ================================================== -->
+    <div id="myCarousel" class="carousel slide" data-ride="carousel">
+      <!-- Indicators -->
+      <ol class="carousel-indicators">
+        <li ng-repeat="vin in vm.vins track by vin.id"
+			ng-class='{active:vin.active}' data-target="#/mes_vins#myCarousel" data-slide-to="{{ vin.id }}"></li>
+      </ol>
+      <div class="carousel-inner" role="listbox">
+        <div class="item" ng-class='{active:vin.active}' ng-repeat="vin in vm.vins track by vin.id">
+          <img class="first-slide" data-ng-src="{{'data:' + vin.photoEtiquetteContentType + ';base64,' + vin.photoEtiquette}}"
+							alt="{{ vin.appellation }}"></img>
+          <div class="container">
+            <div class="carousel-caption">
+              <h1>{{ vin.appellation }}</h1>
+            </div>
+          </div>
+        </div>
+      </div>
+      <a class="left carousel-control" role="button" data-slide="prev" ui-sref="mes_vins" ng-click="vm.prev()">
+        <span class="glyphicon glyphicon-chevron-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="right carousel-control" role="button" data-slide="next" ui-sref="mes_vins" ng-click="vm.next()">
+        <span class="glyphicon glyphicon-chevron-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a><!-- /.carousel -->
+			
+			
+			<!-- 
+				<div id="myCarousel" class="carousel slide" data-ride="carousel">
+				
+				<ol class="carousel-indicators">
+					<li ng-repeat="vin in vm.vins track by vin.id"
+						data-target="#/mes_vins#myCarousel" data-slide-to="{{ vin.id }}">
+				</ol>
+
+				
+				<div class="carousel-inner">
+					<div class="item active" >
+						<img
+							
+					</div>
+				</div>
+
+				
+				<a class="left carousel-control" href="#/mes_vins#myCarousel"
+					data-slide="prev"> <span
+					class="glyphicon glyphicon-chevron-left"></span> <span
+					class="sr-only">Previous</span>
+				</a> <a class="right carousel-control" href="#/mes_vins#myCarousel"
+					data-slide="next"> <span
+					class="glyphicon glyphicon-chevron-right"></span> <span
+					class="sr-only">Next</span>
+				</a>
+				-->
+			</div>
+		</div>
+		<div class="col-md-8">
+			<div class="table-responsive">
+				<table class="jh-table table table-striped">
+					<thead>
+						<tr jh-sort="vm.predicate" ascending="vm.reverse"
+							callback="vm.reset()">
+							<th jh-sort-by="appellation"><span>Appellation</span> <span
+								class="glyphicon glyphicon-sort"></span></th>
+							<th jh-sort-by="domaine"><span>Domaine</span> <span
+								class="glyphicon glyphicon-sort"></span></th>
+							<th jh-sort-by="cuvee"><span>Cuvee</span> <span
+								class="glyphicon glyphicon-sort"></span></th>
+							<th jh-sort-by="region"><span>Region</span> <span
+								class="glyphicon glyphicon-sort"></span></th>
+							<th jh-sort-by="millesime.libelle"><span>Millesime</span> <span
+								class="glyphicon glyphicon-sort"></span></th>
+							<th></th>
+						</tr>
+					</thead>
+					<tbody infinite-scroll="vm.loadPage(vm.page + 1)"
+						infinite-scroll-disabled="vm.page >= vm.links['last']">
+						<tr ng-repeat="vin in vm.vins track by vin.id">
+							<td>{{vin.appellation}}</td>
+							<td>{{vin.domaine}}</td>
+							<td>{{vin.cuvee}}</td>
+							<td>{{vin.region}}</td>
+							<td><a ui-sref="millesime-detail({id:vin.millesime.id})">{{vin.millesime.libelle}}</a>
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+		</div>
+	</div>
+</div>
+</div>

@@ -1,0 +1,20 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "libelle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "pattern"
+            ],
+            "fieldValidateRulesPattern": "^[1-2][0-9][0-9][0-9]$"
+        }
+    ],
+    "changelogDate": "20170709155730",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "millesime",
+    "pagination": "no"
+}

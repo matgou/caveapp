@@ -1,0 +1,86 @@
+
+<div>
+    <h2><span>Vin</span> {{vm.vin.id}}</h2>
+    <hr>
+    <jhi-alert-error></jhi-alert-error>
+    <dl class="dl-horizontal jh-entity-details">
+        <dt><span>Appellation</span></dt>
+        <dd>
+            <span>{{vm.vin.appellation}}</span>
+        </dd>
+        <dt><span>Cuvee</span></dt>
+        <dd>
+            <span>{{vm.vin.cuvee}}</span>
+        </dd>
+        <dt><span>Cepage</span></dt>
+        <dd>
+            <span>{{vm.vin.cepage}}</span>
+        </dd>
+        <dt><span>Region</span></dt>
+        <dd>
+            <span>{{vm.vin.region}}</span>
+        </dd>
+        <dt><span>Domaine</span></dt>
+        <dd>
+            <span>{{vm.vin.domaine}}</span>
+        </dd>
+        <dt><span>Temperature</span></dt>
+        <dd>
+            <span>{{vm.vin.temperature}}</span>
+        </dd>
+        <dt><span>Taux Alcool</span></dt>
+        <dd>
+            <span>{{vm.vin.tauxAlcool}}</span>
+        </dd>
+        <dt><span>Code Bare</span></dt>
+        <dd>
+            <span>{{vm.vin.codeBare}}</span>
+        </dd>
+        <dt><span>Annee Debut</span></dt>
+        <dd>
+            <span>{{vm.vin.anneeDebut}}</span>
+        </dd>
+        <dt><span>Annee Fin</span></dt>
+        <dd>
+            <span>{{vm.vin.anneeFin}}</span>
+        </dd>
+        <dt><span>Description</span></dt>
+        <dd>
+            <span>{{vm.vin.description}}</span>
+        </dd>
+        <dt><span>Photo Etiquette</span></dt>
+        <dd>
+            <div ng-if="vm.vin.photoEtiquette">
+                <a ng-click="vm.openFile(vm.vin.photoEtiquetteContentType, vm.vin.photoEtiquette)">
+                    <img data-ng-src="{{'data:' + vm.vin.photoEtiquetteContentType + ';base64,' + vm.vin.photoEtiquette}}" style="max-width: 100%;" alt="vin image"/>
+                </a>
+                {{vm.vin.photoEtiquetteContentType}}, {{vm.byteSize(vm.vin.photoEtiquette)}}
+            </div>
+        </dd>
+        <dt><span>Type Vin</span></dt>
+        <dd>
+            <a ui-sref="type-vin-detail({id:vm.vin.typeVin.id})">{{vm.vin.typeVin.libelle}}</a>
+        </dd>
+        <dt><span>Millesime</span></dt>
+        <dd>
+            <a ui-sref="millesime-detail({id:vm.vin.millesime.id})">{{vm.vin.millesime.libelle}}</a>
+        </dd>
+        <dt><span>Met</span></dt>
+        <dd>
+            <span ng-repeat="met in vm.vin.mets">
+                <a ui-sref="met-detail({id: met.id})">{{met.id}}</a>{{$last ? '' : ', '}}
+            </span>
+        </dd>
+    </dl>
+
+    <button type="submit"
+            ui-sref="{{ vm.previousState }}"
+            class="btn btn-info">
+        <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span> Back</span>
+    </button>
+
+    <button type="button" ui-sref="vin-detail.edit({id:vm.vin.id})" class="btn btn-primary">
+        <span class="glyphicon glyphicon-pencil"></span>
+        <span class="hidden-sm-down"> Edit</span>
+    </button>
+</div>

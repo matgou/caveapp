@@ -1,0 +1,150 @@
+
+<form name="editForm" role="form" novalidate ng-submit="vm.save()" show-validation>
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true"
+                ng-click="vm.clear()">&times;</button>
+        <h4 class="modal-title" id="myVinLabel">Create or edit a Vin</h4>
+    </div>
+    <div class="modal-body">
+        <jhi-alert-error></jhi-alert-error>
+        <div class="form-group" ng-show="vm.vin.id">
+            <label for="id">ID</label>
+            <input type="text" class="form-control" id="id" name="id"
+                    ng-model="vm.vin.id" readonly />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_appellation">Appellation</label>
+            <input type="text" class="form-control" name="appellation" id="field_appellation"
+                    ng-model="vm.vin.appellation"
+                    required ng-minlength="3" ng-maxlength="255"/>
+            <div ng-show="editForm.appellation.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.appellation.$error.required">
+                    This field is required.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.appellation.$error.minlength" translate-value-min="3">
+                    This field is required to be at least 3 characters.
+                </p>
+                <p class="help-block"
+                    ng-show="editForm.appellation.$error.maxlength">
+                    This field cannot be longer than 255 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_cuvee">Cuvee</label>
+            <input type="text" class="form-control" name="cuvee" id="field_cuvee"
+                    ng-model="vm.vin.cuvee"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_cepage">Cepage</label>
+            <input type="text" class="form-control" name="cepage" id="field_cepage"
+                    ng-model="vm.vin.cepage"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_region">Region</label>
+            <input type="text" class="form-control" name="region" id="field_region"
+                    ng-model="vm.vin.region"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_domaine">Domaine</label>
+            <input type="text" class="form-control" name="domaine" id="field_domaine"
+                    ng-model="vm.vin.domaine"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_temperature">Temperature</label>
+            <input type="text" class="form-control" name="temperature" id="field_temperature"
+                    ng-model="vm.vin.temperature"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_tauxAlcool">Taux Alcool</label>
+            <input type="text" class="form-control" name="tauxAlcool" id="field_tauxAlcool"
+                    ng-model="vm.vin.tauxAlcool"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_codeBare">Code Bare</label>
+            <input type="text" class="form-control" name="codeBare" id="field_codeBare"
+                    ng-model="vm.vin.codeBare"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_anneeDebut">Annee Debut</label>
+            <input type="number" class="form-control" name="anneeDebut" id="field_anneeDebut"
+                    ng-model="vm.vin.anneeDebut"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_anneeFin">Annee Fin</label>
+            <input type="number" class="form-control" name="anneeFin" id="field_anneeFin"
+                    ng-model="vm.vin.anneeFin"
+                    />
+        </div>
+        <div class="form-group">
+            <label class="control-label" for="field_description">Description</label>
+            <input type="text" class="form-control" name="description" id="field_description"
+                    ng-model="vm.vin.description"
+                    ng-minlength="0"/>
+            <div ng-show="editForm.description.$invalid">
+                <p class="help-block"
+                    ng-show="editForm.description.$error.minlength" translate-value-min="0">
+                    This field is required to be at least 0 characters.
+                </p>
+            </div>
+        </div>
+        <div class="form-group" ngf-drop ngf-change="vm.setPhotoEtiquette($file, vm.vin)" ngf-pattern="'image/*'">
+            <label class="control-label" for="field_photoEtiquette">Photo Etiquette</label>
+            <div>
+                <img data-ng-src="{{'data:' + vm.vin.photoEtiquetteContentType + ';base64,' + vm.vin.photoEtiquette}}" style="max-height: 100px;" ng-if="vm.vin.photoEtiquette" alt="vin image"/>
+                <div ng-if="vm.vin.photoEtiquette" class="help-block clearfix">
+                    <span class="pull-left">{{vm.vin.photoEtiquetteContentType}}, {{vm.byteSize(vm.vin.photoEtiquette)}}</span>
+                    <button type="button" ng-click="vm.vin.photoEtiquette=null;vm.vin.photoEtiquetteContentType=null;"
+                            class="btn btn-default btn-xs pull-right">
+                        <span class="glyphicon glyphicon-remove"></span>
+                    </button>
+                </div>
+                <button type="button" ngf-select class="btn btn-default btn-block"
+                        ngf-change="vm.setPhotoEtiquette($file, vm.vin)" accept="image/*">
+                    Add image
+                </button>
+            </div>
+            <input type="hidden" class="form-control" name="photoEtiquette" id="field_photoEtiquette"
+                    ng-model="vm.vin.photoEtiquette"
+                    />
+            <input type="hidden" class="form-control" name="photoEtiquetteContentType" id="field_photoEtiquetteContentType"
+                    ng-model="vm.vin.photoEtiquetteContentType" />
+        </div>
+
+        <div class="form-group">
+            <label for="field_typeVin">Type Vin</label>
+            <select class="form-control" id="field_typeVin" name="typeVin" ng-model="vm.vin.typeVin" ng-options="typeVin as typeVin.libelle for typeVin in vm.typevins track by typeVin.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_millesime">Millesime</label>
+            <select class="form-control" id="field_millesime" name="millesime" ng-model="vm.vin.millesime" ng-options="millesime as millesime.libelle for millesime in vm.millesimes track by millesime.id">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="form-group">
+            <label for="field_met">Met</label>
+            <select class="form-control" id="field_met" multiple name="met" ng-model="vm.vin.mets" ng-options="met as met.id for met in vm.mets track by met.id"></select>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">
+            <span class="glyphicon glyphicon-ban-circle"></span>&nbsp;<span>Cancel</span>
+        </button>
+        <button type="submit" ng-disabled="editForm.$invalid || vm.isSaving" class="btn btn-primary">
+            <span class="glyphicon glyphicon-save"></span>&nbsp;<span>Save</span>
+        </button>
+    </div>
+</form>

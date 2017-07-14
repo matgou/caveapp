@@ -1,0 +1,33 @@
+{
+    "fluentMethods": true,
+    "relationships": [
+        {
+            "relationshipName": "vin",
+            "otherEntityName": "vin",
+            "relationshipType": "many-to-many",
+            "ownerSide": false,
+            "otherEntityRelationshipName": "met"
+        }
+    ],
+    "fields": [
+        {
+            "fieldName": "categorie",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "3",
+            "fieldValidateRulesMaxlength": "255"
+        },
+        {
+            "fieldName": "description",
+            "fieldType": "String"
+        }
+    ],
+    "changelogDate": "20170709155943",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "met",
+    "pagination": "infinite-scroll"
+}

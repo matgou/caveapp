@@ -1,0 +1,22 @@
+{
+    "fluentMethods": true,
+    "relationships": [],
+    "fields": [
+        {
+            "fieldName": "libelle",
+            "fieldType": "String",
+            "fieldValidateRules": [
+                "required",
+                "minlength",
+                "maxlength"
+            ],
+            "fieldValidateRulesMinlength": "3",
+            "fieldValidateRulesMaxlength": "255"
+        }
+    ],
+    "changelogDate": "20170709155546",
+    "dto": "no",
+    "service": "serviceImpl",
+    "entityTableName": "type_vin",
+    "pagination": "no"
+}

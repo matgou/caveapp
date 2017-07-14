@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<databaseChangeLog
+    xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <!--
+        Added the constraints for entity Vin.
+    -->
+    <changeSet id="20170709161456-2" author="jhipster">
+        
+        <addForeignKeyConstraint baseColumnNames="type_vin_id"
+                                 baseTableName="vin"
+                                 constraintName="fk_vin_type_vin_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="type_vin"/>
+
+        <addForeignKeyConstraint baseColumnNames="millesime_id"
+                                 baseTableName="vin"
+                                 constraintName="fk_vin_millesime_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="millesime"/>
+
+        <addForeignKeyConstraint baseColumnNames="vins_id"
+                                 baseTableName="vin_met"
+                                 constraintName="fk_vin_met_vins_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="vin"/>
+        <addForeignKeyConstraint baseColumnNames="mets_id"
+                                 baseTableName="vin_met"
+                                 constraintName="fk_vin_met_mets_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="met"/>
+        
+    </changeSet>
+</databaseChangeLog>

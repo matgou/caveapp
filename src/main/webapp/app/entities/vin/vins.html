@@ -1,0 +1,91 @@
+<div>
+    <h2>Vins</h2>
+    <jhi-alert></jhi-alert>
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-4 no-padding-left">
+                <button class="btn btn-primary" ui-sref="vin.new" >
+                    <span class="glyphicon glyphicon-plus"></span>
+                    <span >
+                        Create new Vin
+                    </span>
+                </button>
+            </div>
+        </div>
+    </div>
+    <br/>
+    <div class="table-responsive">
+        <table class="jh-table table table-striped">
+            <thead>
+                <tr jh-sort="vm.predicate" ascending="vm.reverse" callback="vm.reset()">
+                    <th jh-sort-by="id"><span>ID</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="appellation"><span>Appellation</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cuvee"><span>Cuvee</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="cepage"><span>Cepage</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="region"><span>Region</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="domaine"><span>Domaine</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="temperature"><span>Temperature</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="tauxAlcool"><span>Taux Alcool</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="codeBare"><span>Code Bare</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="anneeDebut"><span>Annee Debut</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="anneeFin"><span>Annee Fin</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="description"><span>Description</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="photoEtiquette"><span>Photo Etiquette</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="typeVin.libelle"><span>Type Vin</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th jh-sort-by="millesime.libelle"><span>Millesime</span> <span class="glyphicon glyphicon-sort"></span></th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody infinite-scroll="vm.loadPage(vm.page + 1)" infinite-scroll-disabled="vm.page >= vm.links['last']">
+                <tr ng-repeat="vin in vm.vins track by vin.id">
+                    <td><a ui-sref="vin-detail({id:vin.id})">{{vin.id}}</a></td>
+                    <td>{{vin.appellation}}</td>
+                    <td>{{vin.cuvee}}</td>
+                    <td>{{vin.cepage}}</td>
+                    <td>{{vin.region}}</td>
+                    <td>{{vin.domaine}}</td>
+                    <td>{{vin.temperature}}</td>
+                    <td>{{vin.tauxAlcool}}</td>
+                    <td>{{vin.codeBare}}</td>
+                    <td>{{vin.anneeDebut}}</td>
+                    <td>{{vin.anneeFin}}</td>
+                    <td>{{vin.description}}</td>
+                    <td>
+                        <a ng-if="vin.photoEtiquette" ng-click="vm.openFile(vin.photoEtiquetteContentType, vin.photoEtiquette)">
+                            <img data-ng-src="{{'data:' + vin.photoEtiquetteContentType + ';base64,' + vin.photoEtiquette}}" style="max-height: 30px;" alt="vin image"/>
+                        </a>
+                        <span ng-if="vin.photoEtiquette">{{vin.photoEtiquetteContentType}}, {{vm.byteSize(vin.photoEtiquette)}}</span>
+                    </td>
+                    <td>
+                        <a ui-sref="type-vin-detail({id:vin.typeVin.id})">{{vin.typeVin.libelle}}</a>
+                    </td>
+                    <td>
+                        <a ui-sref="millesime-detail({id:vin.millesime.id})">{{vin.millesime.libelle}}</a>
+                    </td>
+                    <td class="text-right">
+                        <div class="btn-group flex-btn-group-container">
+                            <button type="submit"
+                                    ui-sref="vin-detail({id:vin.id})"
+                                    class="btn btn-info btn-sm">
+                                <span class="glyphicon glyphicon-eye-open"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="vin.edit({id:vin.id})"
+                                    class="btn btn-primary btn-sm">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                            <button type="submit"
+                                    ui-sref="vin.delete({id:vin.id})"
+                                    class="btn btn-danger btn-sm">
+                                <span class="glyphicon glyphicon-remove-circle"></span>
+                                <span class="hidden-sm-down"></span>
+                            </button>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

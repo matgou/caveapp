@@ -1,0 +1,14 @@
+version: '2'
+services:
+    caveapp-app:
+        image: caveapp
+        environment:
+            - SPRING_PROFILES_ACTIVE=prod,swagger
+            - SPRING_DATASOURCE_URL=jdbc:postgresql://caveapp-postgresql:5432/caveapp
+            - JHIPSTER_SLEEP=10 # gives time for the database to boot before the application
+        ports:
+            - 8080:8080
+    caveapp-postgresql:
+        extends:
+            file: postgresql.yml
+            service: caveapp-postgresql
