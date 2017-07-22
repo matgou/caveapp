@@ -1,8 +1,18 @@
 package info.kapable.caveapp.service.impl;
 
 import info.kapable.caveapp.service.VinService;
+import net.coobird.thumbnailator.Thumbnails;
 import info.kapable.caveapp.domain.Vin;
 import info.kapable.caveapp.repository.VinRepository;
+
+import java.awt.image.BufferedImage;
+import java.io.ByteArrayInputStream;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+
+import javax.imageio.ImageIO;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
@@ -35,6 +45,30 @@ public class VinServiceImpl implements VinService{
     @Override
     public Vin save(Vin vin) {
         log.debug("Request to save Vin : {}", vin);
+        byte[] imageInByte = vin.getPhotoEtiquette();
+        InputStream in = new ByteArrayInputStream(imageInByte);
+        
+        //350 x 450
+        BufferedImage bImageFromConvert;
+		try {
+			bImageFromConvert = ImageIO.read(in);
+			int w = bImageFromConvert.getWidth();
+			int h = bImageFromConvert.getHeight();
+			double scale1 = 350./w;
+			double scale2 = 450./h;
+	        BufferedImage thumbnail = Thumbnails.of(bImageFromConvert)
+	                .scale(Math.max(scale1, scale2))
+	                .asBufferedImage();
+	        
+	        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+	        ImageIO.write( thumbnail, "jpg", baos );
+	        baos.flush();
+	        vin.setPhotoEtiquette(baos.toByteArray());
+	        baos.close();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         return vinRepository.save(vin);
     }
 
