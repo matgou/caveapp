@@ -1,0 +1,42 @@
+
+<div>
+  <jhi-alert-error></jhi-alert-error>
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-4">
+        <div ng-if="vm.vin.photoEtiquette">
+            <img alt="Embedded Image" src="data:{{vm.vin.photoEtiquetteContentType}};base64,{{vm.vin.photoEtiquette}}" style="width:100%"/>
+        </div>
+      </div>
+      <div class="col-md-8">
+        <div class="row">
+          <div class="col-md-4"><h3>{{vm.vin.region}}</h3></div>
+          <div class="col-md-8"><h3>{{vm.vin.typeVin.libelle}}</h3></div>
+        </div>
+        <br/>
+        <h2>{{vm.vin.appellation}}</h2>
+        <span>{{vm.vin.domain}}</span>
+        <span>{{vm.vin.cuvee}} - {{vm.vin.millesime.libelle}}</span>
+        <br/><br/>
+        Temperature: <span>{{vm.vin.temperature}}°C</span>
+        <br/>
+        Taux alcool: <span>#A faire (°)</span>
+        <br/>
+        C&eacute;page: <span>{{vm.vin.cepage}}</span>
+        <br/>
+          <span>{{vm.vin.description}}</span>
+        <hr>
+      </div>
+    </div>
+  </div>
+  <button type="submit"
+          ui-sref="{{ vm.previousState }}"
+          class="btn btn-info">
+      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
+  </button>
+
+  <button type="button" ui-sref="vin-cave-detail.edit({id:vm.vin.id})" class="btn btn-primary">
+      <span class="glyphicon glyphicon-pencil"></span>
+      <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
+  </button>
+</div>
