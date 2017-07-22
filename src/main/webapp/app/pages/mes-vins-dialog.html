@@ -16,10 +16,10 @@
 						<label class="control-label" for="field_photoEtiquette">Photo
 							Etiquette</label>
 						<div>
-							<img ng-if="!vm.vin.photoEtiquette" src="content/images/bottle_tag.png" alt="Etiquette de boutielle" />
+							<img ng-if="!vm.vin.photoEtiquette" src="content/images/bottle_tag.png" alt="Etiquette de boutielle" style="width:100%;"/>
 							<img
 								data-ng-src="{{'data:' + vm.vin.photoEtiquetteContentType + ';base64,' + vm.vin.photoEtiquette}}"
-								style="max-height: 100px;" ng-if="vm.vin.photoEtiquette"
+								style="width: 100%;" ng-if="vm.vin.photoEtiquette"
 								alt="vin image" />
 							<div ng-if="vm.vin.photoEtiquette" class="help-block clearfix">
 								<span class="pull-left">{{vm.vin.photoEtiquetteContentType}},

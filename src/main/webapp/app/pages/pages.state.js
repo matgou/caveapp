@@ -87,9 +87,9 @@
                         }
                     }
                 }).result.then(function() {
-                    $state.go('vin', null, { reload: 'vin' });
+                    $state.go('mes_vins', null, { reload: 'mes_vins' });
                 }, function() {
-                    $state.go('vin');
+                    $state.go('mes_vins');
                 });
             }]
         });
