@@ -2,6 +2,7 @@ package info.kapable.caveapp.service.impl;
 
 import info.kapable.caveapp.service.StockService;
 import info.kapable.caveapp.domain.Stock;
+import info.kapable.caveapp.domain.Vin;
 import info.kapable.caveapp.repository.StockRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -72,4 +73,10 @@ public class StockServiceImpl implements StockService{
         log.debug("Request to delete Stock : {}", id);
         stockRepository.delete(id);
     }
+
+	@Override
+	public List<Stock> findByVin(Vin vin) {
+		log.debug("Request to find Stock for wine : {}", vin.getId());
+		return stockRepository.findByVin(vin);
+	}
 }

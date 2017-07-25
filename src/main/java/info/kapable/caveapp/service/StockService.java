@@ -1,6 +1,8 @@
 package info.kapable.caveapp.service;
 
 import info.kapable.caveapp.domain.Stock;
+import info.kapable.caveapp.domain.Vin;
+
 import java.util.List;
 
 /**
@@ -37,4 +39,12 @@ public interface StockService {
      *  @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * the list of stock for a specific vine
+     * 
+     * @param vin the wine to search
+     * @return the list
+     */
+	List<Stock> findByVin(Vin vin);
 }

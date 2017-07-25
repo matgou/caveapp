@@ -20,7 +20,12 @@
                     return data;
                 }
             },
-            'update': { method:'PUT' }
+            'update': { method:'PUT' },
+            'queryFromVin': {
+            	method: 'GET',
+            	isArray: true,
+            	url: 'api/stock-of/:id'
+            }
         });
     }
 })();
