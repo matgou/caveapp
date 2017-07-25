@@ -10,6 +10,28 @@
 							src="data:{{vm.vin.photoEtiquetteContentType}};base64,{{vm.vin.photoEtiquette}}"
 							style="width: 100%" />
 					</div>
+					
+			        <div ng-if="vm.editMode" class="form-group" ngf-drop ngf-change="vm.setPhotoEtiquette($file, vm.vin)" ngf-pattern="'image/*'">
+			            <label class="control-label" for="field_photoEtiquette">Photo Etiquette</label>
+			            <div>
+			                <div ng-if="vm.vin.photoEtiquette" class="help-block clearfix">
+			                    <span class="pull-left">{{vm.vin.photoEtiquetteContentType}}, {{vm.byteSize(vm.vin.photoEtiquette)}}</span>
+			                    <button type="button" ng-click="vm.vin.photoEtiquette=null;vm.vin.photoEtiquetteContentType=null;"
+			                            class="btn btn-default btn-xs pull-right">
+			                        <span class="glyphicon glyphicon-remove"></span>
+			                    </button>
+			                </div>
+			                <button type="button" ngf-select class="btn btn-default btn-block"
+			                        ngf-change="vm.setPhotoEtiquette($file, vm.vin)" accept="image/*">
+			                    Add image
+			                </button>
+			            </div>
+			            <input type="hidden" class="form-control" name="photoEtiquette" id="field_photoEtiquette"
+			                    ng-model="vm.vin.photoEtiquette"
+			                    />
+			            <input type="hidden" class="form-control" name="photoEtiquetteContentType" id="field_photoEtiquetteContentType"
+			                    ng-model="vm.vin.photoEtiquetteContentType" />
+			        </div>
 				</div>
 				<div class="col-md-8">
 					<div class="row">
@@ -127,7 +149,7 @@
 				</button>
 				
 				<button type="button" ng-click="vm.increaseStock()"
-					class="btn btn-success">
+					ng-if="!vm.editMode" class="btn btn-success">
 					<span class="glyphicon glyphicon-plus"></span> <span
 						class="hidden-sm-down" ng-click="vm.increaseStock()"> Ajouter</span>
 				</button>

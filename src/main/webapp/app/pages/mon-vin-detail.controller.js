@@ -82,6 +82,20 @@
             vm.isSaving = false;
         }
 
+        vm.setPhotoEtiquette = function ($file, vin) {
+            if ($file && $file.$error === 'pattern') {
+                return;
+            }
+            if ($file) {
+                DataUtils.toBase64($file, function(base64Data) {
+                    $scope.$apply(function() {
+                        vin.photoEtiquette = base64Data;
+                        vin.photoEtiquetteContentType = $file.type;
+                    });
+                });
+            }
+        };
+
         function save () {
         	console.log('ceci est un test');
             vm.isSaving = true;
