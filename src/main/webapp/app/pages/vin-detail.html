@@ -16,7 +16,7 @@
 			            <div>
 			                <div ng-if="vm.vin.photoEtiquette" class="help-block clearfix">
 			                    <span class="pull-left">{{vm.vin.photoEtiquetteContentType}}, {{vm.byteSize(vm.vin.photoEtiquette)}}</span>
-			                    <button type="button" ng-click="vm.vin.photoEtiquette=null;vm.vin.photoEtiquetteContentType=null;"
+			                    <button type="button" ng-click="vm.setDefaultPhotoEtiquette(vin);"
 			                            class="btn btn-default btn-xs pull-right">
 			                        <span class="glyphicon glyphicon-remove"></span>
 			                    </button>

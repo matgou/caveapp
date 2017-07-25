@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.*;
 @Repository
 public interface StockRepository extends JpaRepository<Stock,Long> {
 
-	@Query("SELECT s FROM Stock s WHERE s.vin = ?1a")
+	@Query("SELECT s FROM Stock s WHERE s.vin = ?1")
 	List<Stock> findByVin(Vin vin);
     
 }

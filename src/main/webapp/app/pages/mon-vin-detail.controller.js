@@ -5,9 +5,9 @@
         .module('caveappApp')
         .controller('MonVinDetailController', MonVinDetailController);
 
-    MonVinDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Vin', 'TypeVin', 'Millesime', 'Stock', 'Met'];
+    MonVinDetailController.$inject = ['$scope', '$rootScope', '$http', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Vin', 'TypeVin', 'Millesime', 'Stock', 'Met'];
 
-    function MonVinDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Vin, TypeVin, Millesime, Stock, Met) {
+    function MonVinDetailController($scope, $rootScope, $http, $stateParams, previousState, DataUtils, entity, Vin, TypeVin, Millesime, Stock, Met) {
         var vm = this;
 
         vm.vin = entity;
@@ -82,6 +82,19 @@
             vm.isSaving = false;
         }
 
+        vm.setDefaultPhotoEtiquette = function(vin) {
+        	$http.get("content/images/bottle_tag.png", {responseType: "blob"})
+            .then(function(blob){
+            	console.log(blob);
+            	DataUtils.toBase64(blob.data, function(base64Data) {
+                    $scope.$apply(function() {
+                        vm.vin.photoEtiquette = base64Data;
+                        vm.vin.photoEtiquetteContentType = 'image/png';
+                    });
+                });
+            });
+        };
+        
         vm.setPhotoEtiquette = function ($file, vin) {
             if ($file && $file.$error === 'pattern') {
                 return;
