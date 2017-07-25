@@ -35,7 +35,7 @@
             views: {
                 'content@': {
                     templateUrl: 'app/pages/vin-detail.html',
-                    controller: 'VinDetailController',
+                    controller: 'MonVinDetailController',
                     controllerAs: 'vm'
                 }
             },
@@ -52,8 +52,7 @@
                     return currentStateData;
                 }]
             }
-    	})
-    	.state('mes_vins.new', {
+    	}).state('mes_vins.new', {
             parent: 'mes_vins',
             url: '/new',
             data: {

@@ -1,42 +1,128 @@
 
 <div>
-  <jhi-alert-error></jhi-alert-error>
-  <div class="container-fluid">
-    <div class="row">
-      <div class="col-md-4">
-        <div ng-if="vm.vin.photoEtiquette">
-            <img alt="Embedded Image" src="data:{{vm.vin.photoEtiquetteContentType}};base64,{{vm.vin.photoEtiquette}}" style="width:100%"/>
-        </div>
-      </div>
-      <div class="col-md-8">
-        <div class="row">
-          <div class="col-md-4"><h3>{{vm.vin.region}}</h3></div>
-          <div class="col-md-8"><h3>{{vm.vin.typeVin.libelle}}</h3></div>
-        </div>
-        <br/>
-        <h2>{{vm.vin.appellation}}</h2>
-        <span>{{vm.vin.domain}}</span>
-        <span>{{vm.vin.cuvee}} - {{vm.vin.millesime.libelle}}</span>
-        <br/><br/>
-        Temperature: <span>{{vm.vin.temperature}}°C</span>
-        <br/>
-        Taux alcool: <span>#A faire (°)</span>
-        <br/>
-        C&eacute;page: <span>{{vm.vin.cepage}}</span>
-        <br/>
-          <span>{{vm.vin.description}}</span>
-        <hr>
-      </div>
-    </div>
-  </div>
-  <button type="submit"
-          ui-sref="{{ vm.previousState }}"
-          class="btn btn-info">
-      <span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span data-translate="entity.action.back"> Back</span>
-  </button>
+	<form name="editForm" ng-submit="vm.save()">
+		<jhi-alert-error></jhi-alert-error>
+		<div class="container-fluid">
+			<div class="row">
+				<div class="col-md-4">
+					<div ng-if="vm.vin.photoEtiquette">
+						<img alt="Embedded Image"
+							src="data:{{vm.vin.photoEtiquetteContentType}};base64,{{vm.vin.photoEtiquette}}"
+							style="width: 100%" />
+					</div>
+				</div>
+				<div class="col-md-8">
+					<div class="row">
+						<div class="col-md-4">
+							<h3>
+								<span ng-if="!vm.editMode">{{vm.vin.region}}</span> <input
+									ng-if="vm.editMode" type="text" class="form-control"
+									name="region" id="field_region" ng-model="vm.vin.region" />
+							</h3>
+						</div>
+						<div class="col-md-8">
+							<h3>
+								<span ng-if="!vm.editMode">{{vm.vin.typeVin.libelle}}</span><select
+									ng-if="vm.editMode" class="form-control" id="field_typeVin"
+									name="typeVin" ng-model="vm.vin.typeVin"
+									ng-options="typeVin as typeVin.libelle for typeVin in vm.typevins track by typeVin.id">
+									<option value=""></option>
+								</select>
+							</h3>
+						</div>
+					</div>
+					<br />
+					<h2>
+						<span ng-if="!vm.editMode">{{vm.vin.appellation}}</span>
+						<div class="form-group" ng-if="vm.editMode">
+							<input type="text" class="form-control" name="appellation"
+								style="font-size: 25px;" id="field_appellation"
+								ng-model="vm.vin.appellation" required ng-minlength="3"
+								ng-maxlength="255" />
+							<div ng-show="editForm.appellation.$invalid">
+								<p class="help-block"
+									ng-show="editForm.appellation.$error.required">This field
+									is required.</p>
+								<p class="help-block"
+									ng-show="editForm.appellation.$error.minlength"
+									translate-value-min="3">This field is required to be at
+									least 3 characters.</p>
+								<p class="help-block"
+									ng-show="editForm.appellation.$error.maxlength">This field
+									cannot be longer than 255 characters.</p>
+							</div>
+						</div>
+					</h2>
+					<span>{{vm.vin.domain}}</span> <span ng-if="!vm.editMode">{{vm.vin.cuvee}}
+						- {{vm.vin.millesime.libelle}}</span>
+					<pan class="form-inline" ng-if="vm.editMode"> <input
+						style="width: 30%;" ng-if="vm.editMode" type="text"
+						class="form-control" name="cuvee" id="field_cuvee"
+						ng-model="vm.vin.cuvee" /> - <select class="form-control"
+						id="field_millesime" name="millesime" style="width: 30%;"
+						ng-model="vm.vin.millesime"
+						ng-options="millesime as millesime.libelle for millesime in vm.millesimes track by millesime.id">
+						<option value=""></option>
+					</select></pan>
 
-  <button type="button" ui-sref="vin-cave-detail.edit({id:vm.vin.id})" class="btn btn-primary">
-      <span class="glyphicon glyphicon-pencil"></span>
-      <span class="hidden-sm-down" data-translate="entity.action.edit"> Edit</span>
-  </button>
+					<br /> <br />
+					<div class="form-inline">
+						Temperature: <span ng-if="!vm.editMode">{{vm.vin.temperature}}</span><input
+							style="width: 30%;" ng-if="vm.editMode" type="text"
+							class="form-control" name="temperature" id="field_temperature"
+							ng-model="vm.vin.temperature" />°C
+					</div>
+					<br /> Taux alcool: <span>#A faire (°)</span> <br />
+					<div class="form-inline">
+						C&eacute;page: <span ng-if="!vm.editMode">{{vm.vin.cepage}}</span><input
+							style="width: 30%;" ng-if="vm.editMode" type="text"
+							class="form-control" name="cepage" id="field_cepage"
+							ng-model="vm.vin.cepage" />
+					</div>
+					<br />
+					<div>
+						<span ng-if="!vm.editMode">{{vm.vin.description}}</span> <input
+							ng-if="vm.editMode" style="height: 120px;" type="textarea"
+							class="form-control" name="description" id="field_description"
+							ng-model="vm.vin.description" ng-minlength="0" />
+						<div ng-show="editForm.description.$invalid">
+							<p class="help-block"
+								ng-show="editForm.description.$error.minlength"
+								translate-value-min="0">This field is required to be at
+								least 0 characters.</p>
+						</div>
+					</div>
+					<hr>
+				</div>
+			</div>
+		</div>
+		<div class="row">
+			<div class="col-md-8">&nbsp;</div>
+			<div class="col-md-4">
+				<button type="button" ui-sref="{{ vm.previousState }}"
+					class="btn btn-info">
+					<span class="glyphicon glyphicon-arrow-left"></span>&nbsp;<span
+						data-translate="entity.action.back"> Back</span>
+				</button>
+
+				<button type="button" ng-click="vm.toggleEditMode()"
+					ng-if="vm.editMode" class="btn btn-warning">
+					<span class="glyphicon glyphicon-pencil"></span> <span
+						class="hidden-sm-down" ng-click="vm.toggleEditMode()">
+						Annuler</span>
+				</button>
+				<button type="button" ng-click="vm.toggleEditMode()"
+					ng-if="!vm.editMode" class="btn btn-primary">
+					<span class="glyphicon glyphicon-pencil"></span> <span
+						class="hidden-sm-down" ng-click="vm.toggleEditMode()"> Edit</span>
+				</button>
+
+				<button type="submit" ng-click="vm.save()" ng-if="vm.editMode"
+					class="btn btn-danger">
+					<span class="glyphicon glyphicon-pencil"></span> <span
+						class="hidden-sm-down" ng-click="vm.save()"> Sauvegarder</span>
+				</button>
+			</div>
+		</div>
+	</form>
 </div>
