@@ -49,13 +49,13 @@
 
 
         vm.setDefaultPhotoEtiquette = function(vin) {
-        	$http.get("content/images/bottle_tag.png", {responseType: "blob"})
+        	$http.get("content/images/bottle_tag.jpg", {responseType: "blob"})
             .then(function(blob){
             	console.log(blob);
             	DataUtils.toBase64(blob.data, function(base64Data) {
                     $scope.$apply(function() {
                         vm.vin.photoEtiquette = base64Data;
-                        vm.vin.photoEtiquetteContentType = 'image/png';
+                        vm.vin.photoEtiquetteContentType = 'image/jpeg';
                     });
                 });
             });
