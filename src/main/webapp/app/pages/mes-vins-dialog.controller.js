@@ -5,9 +5,9 @@
         .module('caveappApp')
         .controller('MesVinsDialogController', MesVinsDialogController);
 
-    MesVinsDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Vin', 'TypeVin', 'Millesime', 'Stock', 'Met'];
+    MesVinsDialogController.$inject = ['$timeout', '$http', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Vin', 'TypeVin', 'Millesime', 'Stock', 'Met'];
 
-    function MesVinsDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Vin, TypeVin, Millesime, Stock, Met) {
+    function MesVinsDialogController ($timeout, $http, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Vin, TypeVin, Millesime, Stock, Met) {
         var vm = this;
 
         vm.vin = entity;
@@ -48,6 +48,19 @@
         }
 
 
+        vm.setDefaultPhotoEtiquette = function(vin) {
+        	$http.get("content/images/bottle_tag.png", {responseType: "blob"})
+            .then(function(blob){
+            	console.log(blob);
+            	DataUtils.toBase64(blob.data, function(base64Data) {
+                    $scope.$apply(function() {
+                        vm.vin.photoEtiquette = base64Data;
+                        vm.vin.photoEtiquetteContentType = 'image/png';
+                    });
+                });
+            });
+        };
+        
         vm.setPhotoEtiquette = function ($file, vin) {
             if ($file && $file.$error === 'pattern') {
                 return;
@@ -62,5 +75,6 @@
             }
         };
 
+        vm.setDefaultPhotoEtiquette();
     }
 })();
