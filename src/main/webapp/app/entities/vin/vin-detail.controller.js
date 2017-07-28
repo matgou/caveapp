@@ -5,9 +5,9 @@
         .module('caveappApp')
         .controller('VinDetailController', VinDetailController);
 
-    VinDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Vin', 'TypeVin', 'Millesime', 'Stock', 'Met'];
+    VinDetailController.$inject = ['$scope', '$rootScope', '$stateParams', 'previousState', 'DataUtils', 'entity', 'Vin', 'TypeVin', 'Millesime', 'Stock', 'Met', 'User'];
 
-    function VinDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Vin, TypeVin, Millesime, Stock, Met) {
+    function VinDetailController($scope, $rootScope, $stateParams, previousState, DataUtils, entity, Vin, TypeVin, Millesime, Stock, Met, User) {
         var vm = this;
 
         vm.vin = entity;

@@ -82,6 +82,9 @@ public class Vin implements Serializable {
                inverseJoinColumns = @JoinColumn(name="mets_id", referencedColumnName="id"))
     private Set<Met> mets = new HashSet<>();
 
+    @ManyToOne
+    private User user;
+
     public Long getId() {
         return id;
     }
@@ -333,6 +336,19 @@ public class Vin implements Serializable {
 
     public void setMets(Set<Met> mets) {
         this.mets = mets;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public Vin user(User user) {
+        this.user = user;
+        return this;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 
     @Override

@@ -138,6 +138,12 @@
             <label for="field_met">Met</label>
             <select class="form-control" id="field_met" multiple name="met" ng-model="vm.vin.mets" ng-options="met as met.id for met in vm.mets track by met.id"></select>
         </div>
+        <div class="form-group">
+            <label for="field_user">User</label>
+            <select class="form-control" id="field_user" name="user" ng-model="vm.vin.user" ng-options="user as user.login for user in vm.users track by user.id">
+                <option value=""></option>
+            </select>
+        </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-default" data-dismiss="modal" ng-click="vm.clear()">

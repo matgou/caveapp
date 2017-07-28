@@ -26,9 +26,9 @@ spring:
         serialization.indent_output: true
     datasource:
         type: com.zaxxer.hikari.HikariDataSource
-        url: jdbc:postgresql://db_host:5432/caveapp
-        username: postgres
-        password: mysecretpassword
+        url: jdbc:postgresql://pfhd2.kapable.info:15433/caveapp
+        username: caveapp
+        password: caveAppDBPasswd
     jpa:
         database-platform: io.github.jhipster.domain.util.FixedPostgreSQL82Dialect
         database: POSTGRESQL

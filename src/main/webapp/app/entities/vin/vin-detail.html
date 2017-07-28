@@ -71,6 +71,10 @@
                 <a ui-sref="met-detail({id: met.id})">{{met.id}}</a>{{$last ? '' : ', '}}
             </span>
         </dd>
+        <dt><span>User</span></dt>
+        <dd>
+            {{vm.vin.user.login}}
+        </dd>
     </dl>
 
     <button type="submit"

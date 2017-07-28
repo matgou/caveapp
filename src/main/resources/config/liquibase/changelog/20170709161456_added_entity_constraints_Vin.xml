@@ -31,5 +31,11 @@
                                  referencedColumnNames="id"
                                  referencedTableName="met"/>
         
+        <addForeignKeyConstraint baseColumnNames="user_id"
+                                 baseTableName="vin"
+                                 constraintName="fk_vin_user_id"
+                                 referencedColumnNames="id"
+                                 referencedTableName="jhi_user"/>
+
     </changeSet>
 </databaseChangeLog>

@@ -5,9 +5,9 @@
         .module('caveappApp')
         .controller('VinDialogController', VinDialogController);
 
-    VinDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Vin', 'TypeVin', 'Millesime', 'Stock', 'Met'];
+    VinDialogController.$inject = ['$timeout', '$scope', '$stateParams', '$uibModalInstance', 'DataUtils', 'entity', 'Vin', 'TypeVin', 'Millesime', 'Stock', 'Met', 'User'];
 
-    function VinDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Vin, TypeVin, Millesime, Stock, Met) {
+    function VinDialogController ($timeout, $scope, $stateParams, $uibModalInstance, DataUtils, entity, Vin, TypeVin, Millesime, Stock, Met, User) {
         var vm = this;
 
         vm.vin = entity;
@@ -19,6 +19,7 @@
         vm.millesimes = Millesime.query();
         vm.stocks = Stock.query();
         vm.mets = Met.query();
+        vm.users = User.query();
 
         $timeout(function (){
             angular.element('.form-group:eq(1)>input').focus();

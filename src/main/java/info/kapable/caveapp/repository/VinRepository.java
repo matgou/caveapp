@@ -13,6 +13,9 @@ import java.util.List;
 @SuppressWarnings("unused")
 @Repository
 public interface VinRepository extends JpaRepository<Vin,Long> {
+
+    @Query("select vin from Vin vin where vin.user.login = ?#{principal.username}")
+    List<Vin> findByUserIsCurrentUser();
     
     @Query("select distinct vin from Vin vin left join fetch vin.mets")
     List<Vin> findAllWithEagerRelationships();
