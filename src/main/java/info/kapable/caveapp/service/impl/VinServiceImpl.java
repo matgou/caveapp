@@ -75,22 +75,26 @@ public class VinServiceImpl implements VinService{
 	        BufferedImage bImageFromConvert;
 			try {
 				bImageFromConvert = ImageIO.read(in);
-				int w = bImageFromConvert.getWidth();
-				int h = bImageFromConvert.getHeight();
-				// Calculate scale factor to obtain image 350px x 450px
-				double scale1 = 350./w;
-				double scale2 = 450./h;
-				// Resize image
-		        BufferedImage thumbnail = Thumbnails.of(bImageFromConvert)
-		                .scale(Math.max(scale1, scale2))
-		                .asBufferedImage();
-		        
-		        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-		        ImageIO.write( thumbnail, "jpg", baos );
-		        baos.flush();
-		        // Update vin object
-		        vin.setPhotoEtiquette(baos.toByteArray());
-		        baos.close();
+				// if not null
+				if(bImageFromConvert != null) {
+					int w = bImageFromConvert.getWidth();
+					int h = bImageFromConvert.getHeight();
+					// Calculate scale factor to obtain image 350px x 450px
+					double scale1 = 350./w;
+					double scale2 = 450./h;
+					// Resize image
+			        BufferedImage thumbnail = Thumbnails.of(bImageFromConvert)
+			                .scale(Math.max(scale1, scale2))
+			                .asBufferedImage();
+			        
+			        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+			        ImageIO.write( thumbnail, "jpg", baos );
+					
+			        baos.flush();
+			        // Update vin object
+			        vin.setPhotoEtiquette(baos.toByteArray());
+			        baos.close();
+				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block
 				e.printStackTrace();
